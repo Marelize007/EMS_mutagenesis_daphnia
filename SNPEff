@@ -1,0 +1,4 @@
+# Input file is the filtered mutations to be annotated.
+# Output file is the functionally annotated mutations. 
+
+java -Xmx4g -jar snpEff.jar -v -cancer -cancerSamples untreated_treated_samples.txt ref_genome input.vcf  > annotated_output.vcf
