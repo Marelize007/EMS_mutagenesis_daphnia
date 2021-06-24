@@ -1,3 +1,6 @@
+# The follow python script can be used to filter out EMS induced mutations. The input file is a VCF file containing the tentative mutations of all treatment lines per isolate.
+# The output files are a VCF file containing the EMS induced mutations that passed the filtering criteria, a text file with a break down of the types of base substitutions, as well as a text file containing all the mutations that did not pass the filtering criteria.
+
 file_path = "input.vcf"
 output_path = "output.vcf"
 tstv_summary_path = "tstv_ratio.txt"
