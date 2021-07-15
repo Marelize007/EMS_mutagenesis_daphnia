@@ -1,4 +1,6 @@
-The following is an example of the VCF file that serves as an input file for the custom python script. This file contains 10 treatment lines (10mM and 25mM) all from the AroMoose (AR) isolate.
+The following is an example of the VCF file that serves as an input file for the custom python script. This file contains 10 treatment lines (AR_10_1 to AR_25_G3) all from the AroMoose (AR) isolate.
+Depending on the number of samples in the VCF file, one will need to adjust the "sample_column_list" in line 12 of the custom python script by adding the column number for each sample.
+The column number for the sample to be tested will be added to "column_of_interest" in line 13 of the custom python script. 
 
 ##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">
