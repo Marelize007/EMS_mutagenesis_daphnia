@@ -6,7 +6,7 @@ The following repository containes the scripts used to identify EMS induced muta
 
 bwa mem reference_genome.fa inputfile_1.fq.gz inputfile_2.fq.gz > output.sam
     
-2. The mpileup and call functions of BCFtools (Li, 2011) along with default parameters were used to generate genotype likelihoods and genotype calls in a VCF file containing all EMS mutant lines derived from each natural Daphnia isolate. We added the following FORMAT and INFO tags to the VCF file: AD (allelic depth), DP (number of high-quality bases), ADF (allelic depth on forward strand) and ADR (allelic depth on reverse strand). An examle output file, output.vcf, can be viewed in this repository.
+2. The mpileup and call functions of BCFtools (Li, 2011) along with default parameters were used to generate genotype likelihoods and genotype calls in a VCF file containing all EMS mutant lines derived from each natural Daphnia isolate. We added the following FORMAT and INFO tags to the VCF file: AD (allelic depth), DP (number of high-quality bases), ADF (allelic depth on forward strand) and ADR (allelic depth on reverse strand). An examle output file, output_file.vcf, can be viewed in this repository.
     
 bcftools mpileup -Ou -f reference_genome.fa -a INFO/AD,FORMAT/AD,FORMAT/DP,FORMAT/ADF,FORMAT/ADR,FORMAT/SP,FORMAT/SCR  input_file_1.bam  input_file_2.bam input_file_3.bam | bcftools call --threads 20  -mO z -o output.vcf.gz
 
