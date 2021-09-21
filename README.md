@@ -15,6 +15,10 @@ java -Xmx2g -XX:MaxMetaspaceSize=256m -jar picard.jar MarkDuplicates INPUT=input
     
 bcftools mpileup -Ou -f reference_genome.fa -a INFO/AD,FORMAT/AD,FORMAT/DP,FORMAT/ADF,FORMAT/ADR,FORMAT/SP,FORMAT/SCR  input_file_1.bam  input_file_2.bam input_file_3.bam | bcftools call --threads xx  -mO z -o output_file.vcf.gz
 
+bcftools filter -S . -i 'QUAL>=20 & FORMAT/DP>=10' input.vcf -Ov -o output.vcf ## Quality and depth filter
+bcftools filter -g 50 input.vcf -Ov -o output.vcf ## Indel filter
+bcftools view -m2 -M2 -v snps  input.vcf -Ov -o output.vcf  ## Only retain biallelic SNPs
+
 4. After additional filtering with BCFtools, a custom python script, filter_mutations.py, was used to further filter mutations based on a consensus method, forward and reverse read support, and to only retain homozygous to heterozygous mutant genotype calls. For each SNP site a consensus genotype call is established using a majority rule. If a VCF file has a total of N samples, N-1 of those samples need to be in agreement to establish a consensus genotype call. If an EMS sample shows a genotype call different from the consensus, a tentative mutation is called. Since EMS has been shown to induce mutations randomly into the genome, it is highly unlikely that the same mutation will be observed amongst multiple EMS treatment lines. Each genotype call also has to be supported by at least 2 forward and 2 reverse reads in order to limit false positives due to sequencing errors. Only homozygous to heterozygous mutant genotype calls were retained to avoid false positived due to allele drop caused by insufficient sequence coverage or artifacts in library construction at heterozygous sites. Both the number of samples needed for the consensus genotype and the read support can be manually adjusted as indicated in the script. The output files are a VCF file containing the final set of mutations, a text file containing the breakdown of the types of base substitutions, and a text file containing all of the mutations that failed the filtering criteria.
 
 python3 filter_mutations.py
